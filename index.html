@@ -10,7 +10,9 @@
       var shop = params.get('shop') || params.get('host');
       if (shop) {
         var storeHandle = shop.replace(/\.myshopify\.com$/i, '').replace(/\?.*$/, '').trim() || shop;
-        var adminUrl = 'https://admin.shopify.com/store/' + encodeURIComponent(storeHandle) + '/discounts/new';
+        // automatic-app = uygulama indirimi formu (Smart Volume Discount buradan seçilir). Çalışmazsa /discounts/new kullan.
+        var path = '/discounts/new/automatic-app';
+        var adminUrl = 'https://admin.shopify.com/store/' + encodeURIComponent(storeHandle) + path;
         window.location.replace(adminUrl);
         return;
       }
