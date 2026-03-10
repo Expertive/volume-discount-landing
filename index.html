@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Volume Discount</title>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var shop = params.get('shop') || params.get('host');
+      if (shop) {
+        var storeHandle = shop.replace(/\.myshopify\.com$/i, '').replace(/\?.*$/, '').trim() || shop;
+        var adminUrl = 'https://admin.shopify.com/store/' + encodeURIComponent(storeHandle) + '/discounts/new';
+        window.location.replace(adminUrl);
+        return;
+      }
+      document.documentElement.classList.add('no-redirect');
+    })();
+  </script>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 36em; margin: 4em auto; padding: 0 1em; line-height: 1.5; color: #333; }
+    h1 { font-size: 1.25rem; }
+    p { margin: 1em 0; }
+    a { color: #008060; }
+    .no-redirect body { margin-top: 2em; }
+  </style>
+</head>
+<body>
+  <h1>Smart Volume Discount</h1>
+  <p>Yönlendiriliyorsunuz…</p>
+  <p class="fallback" style="display:none;">Mağaza bilgisi bulunamadı. İndirim oluşturmak için Admin’de <strong>Satış → İndirimler → İndirim oluştur</strong> sayfasına gidin ve <strong>Smart Volume Discount</strong> uygulama indirimini seçin.</p>
+  <script>
+    if (document.documentElement.classList.contains('no-redirect')) {
+      document.querySelector('.fallback').style.display = 'block';
+      document.querySelectorAll('p')[1].textContent = '';
+    }
+  </script>
+</body>
+</html>
